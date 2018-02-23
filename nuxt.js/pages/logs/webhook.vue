@@ -5,9 +5,9 @@
 
       <h3>Webhook</h3>
 
-      <div class="mt-3">
-        <div class="text-muted">https://hogehoge.com/webhook</div>
-        <div class="text-muted">last access: 33 minutes</div>
+      <div class="mt-3" v-if="item">
+        <div class="text-muted">{{url}}/webhook/{{item.name}}</div>
+        <div class="text-muted" v-if="logs.length">last access: {{logs[0].created_at}}</div>
         <div class="text-muted">count: {{count}} </div>
       </div>
 
@@ -20,7 +20,6 @@
           <a class="btn btn-block btn-light" @click="load">more</a>
         </div>
       </div>
-
     </div>
   </section>
 </template>
@@ -47,6 +46,9 @@
     computed:{
       item(){
         return this.$store.state.active;
+      },
+      url(){
+        return process.env.APP_URL;
       }
     },
     methods:{
@@ -62,10 +64,9 @@
         if(this.count === this.logs.length || response.data.logs.length === 0){
           this.hasMore = false;
         }
-
       }
     },
-    async mounted(){
+    async created(){
       if(!this.item){
         this.$router.push("/")
       }

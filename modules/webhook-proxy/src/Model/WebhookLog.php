@@ -17,14 +17,21 @@ class WebhookLog extends Model {
 
 	protected $guarded = [];
 
+	protected $casts = [
+	    'request_body' => 'array',
+	    'request_headers' => 'array',
+	    'response_body' => 'array',
+	    'response_headers' => 'array',
+    ];
+
 	public function webhook(  ) {
 		return $this->belongsTo(Webhook::class,"webhook_id");
 	}
 
 	public function createByRequest(Webhook $webhook,Request $request ) {
 		$this->fill([
-			"request_body" => json_encode($request->all()),
-			"request_headers" => json_encode($request->header()),
+			"request_body" => $request->all(),
+			"request_headers" => $request->header(),
 			"remote_host" => $request->server("REMOTE_HOST",$request->server("REMOTE_ADDR")),
 		]);
 		$this->webhook()->associate($webhook);
@@ -35,8 +42,8 @@ class WebhookLog extends Model {
 	public function updateByResponse(Response $response){
 		$this->fill([
 			"response_status" => $response->getStatusCode(),
-			"response_body" => json_encode($response->getBody()->getContents()),
-			"response_headers" => json_encode($response->getHeaders()),
+			"response_body" => $response->getBody()->getContents(),
+			"response_headers" => $response->getHeaders(),
 		]);
 		$this->save();
 	}

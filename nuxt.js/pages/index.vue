@@ -11,7 +11,7 @@
 
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1">{{item.name}}</h5>
-            <small>3 days ago</small>
+            <!--<small>3 days ago</small>-->
           </div>
           <p class="mb-1">{{url + '/webhook/' +item.name}}</p>
           <small v-if="item.url">Proxy to {{item.url}}</small>

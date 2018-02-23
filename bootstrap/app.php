@@ -97,7 +97,9 @@ $app->register(\Chatbox\WebhookProxy\WebhookProxyServiceProvider::class);
 $app->router->group([
     'namespace' => 'App\Http\Controllers',
 ], function ($router) {
-    require __DIR__.'/../routes/web.php';
+	$router->get('/', function () use ($router) {
+		return $router->app->version();
+	});
 });
 
 return $app;

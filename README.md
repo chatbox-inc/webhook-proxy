@@ -6,10 +6,13 @@ Webhook のリクエストとレスポンスをロギングするためのやつ
 
 ## Usage
 
+setup 
 
 ````
 $ make setup
 ````
+
+serve
 
 ````
 $ npm run dev

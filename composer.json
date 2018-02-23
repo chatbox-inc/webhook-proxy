@@ -30,6 +30,7 @@
     },
     "scripts": {
         "compile":[
+            "touch .env",
             "npm run generate",
             "cp -R public/.htaccess dist",
             "cp -R public/index.php dist"

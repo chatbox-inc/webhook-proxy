@@ -82,6 +82,8 @@ $app->singleton(
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 
+$app->register(\Chatbox\Heroku\HerokuPostgresServiceProvider::class);
+
 $app->register(\Chatbox\WebhookProxy\WebhookProxyServiceProvider::class);
 /*
 |--------------------------------------------------------------------------

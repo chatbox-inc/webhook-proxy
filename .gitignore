@@ -1,0 +1,19 @@
+/vendor
+/.idea
+Homestead.json
+Homestead.yaml
+.env
+
+# dependencies
+node_modules
+
+# logs
+npm-debug.log
+
+# Nuxt build
+.nuxt
+
+# Nuxt generate
+dist
+
+database/database.sqlite

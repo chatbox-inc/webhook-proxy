@@ -1,0 +1,23 @@
+{
+    "name": "chatbox-inc/webhook-proxy",
+    "authors": [
+        {
+            "name": "t.goto",
+            "email": "t.goto@chatbox-inc.com"
+        }
+    ],
+    "autoload":{
+        "psr-4": {
+            "Chatbox\\WebhookProxy\\": "./src/"
+        }
+    },
+    "require": {},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "\\Chatbox\\WebhookProxy\\WebhookProxyServiceProvider"
+            ]
+        }
+    }
+
+}

@@ -1,23 +1,23 @@
 <template>
   <section class="">
     <app-navibar></app-navibar>
-    <div class="container mt-5">
+    <div class="container mt-5" v-if="item">
 
       <h3>Webhook</h3>
 
-      <div class="mt-3" v-if="item">
+      <div class="mt-3">
         <div class="text-muted">{{url}}/webhook/{{item.name}}</div>
         <div class="text-muted" v-if="logs.length">last access: {{logs[0].created_at}}</div>
         <div class="text-muted">count: {{count}} </div>
       </div>
 
       <div class="list-group list-group-flush mt-2">
-        <app-logline v-for="(item,key) in this.logs" :key="key" :item="item"></app-logline>
+        <app-logline v-for="(log,key) in this.logs" :key="key" :item="log"></app-logline>
       </div>
 
       <div class="row mt-5" v-if="count > logs.length">
         <div class="col-sm-8 offset-sm-2">
-          <a class="btn btn-block btn-light" @click="load">more</a>
+          <a class="btn btn-block btn-light" @click="load(item.name)">more</a>
         </div>
       </div>
     </div>
@@ -52,9 +52,9 @@
       }
     },
     methods:{
-      async load(){
+      async load(name){
         const response = await this.$store.dispatch('LOAD_WEBHOOK_LOGS',{
-          name: this.item.name,
+          name,
           page: this.page
         })
         this.logs = this.logs.concat(response.data.logs);
@@ -66,11 +66,11 @@
         }
       }
     },
-    async created(){
+    mounted(){
       if(!this.item){
         this.$router.push("/")
       }
-      await this.load();
+      this.load(this.item.name);
     }
   }
 </script>

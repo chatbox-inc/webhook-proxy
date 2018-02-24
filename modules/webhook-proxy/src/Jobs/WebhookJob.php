@@ -30,7 +30,9 @@ class WebhookJob extends Job
 
     	$client = new Client();
     	try{
-	        $response = $client->request("POST",$url);
+	        $response = $client->request("POST",$url,[
+	        	"form_params" => $this->log->request_body
+	        ]);
 	        $this->log->updateByResponse($response);
 	    }catch (RequestException $e){
 			$this->log->updateByResponse($e->getResponse());

@@ -32,6 +32,7 @@ class WebhookEntryAction {
 		}
 
 		return $this->response([
+			"challenge" => $this->request()->get("challenge")
 		]);
 
 

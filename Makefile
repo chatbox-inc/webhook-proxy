@@ -6,3 +6,5 @@ setup:
 	npm i
 	npm run dev
 	make serve
+release:
+	echo "release"

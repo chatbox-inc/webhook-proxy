@@ -5,6 +5,8 @@
 
       <h3>Webhook</h3>
 
+      <button type="button" @click="reload(item)">Reload</button>
+
       <div class="mt-3">
         <div class="text-muted">{{url}}/webhook/{{item.name}}</div>
         <div class="text-muted" v-if="logs.length">last access: {{logs[0].created_at}}</div>
@@ -64,6 +66,11 @@
         if(this.count === this.logs.length || response.data.logs.length === 0){
           this.hasMore = false;
         }
+      },
+      reload(item) {
+        this.logs = []
+        this.page = 0
+        this.load(item.name)
       }
     },
     mounted(){

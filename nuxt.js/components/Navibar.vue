@@ -11,6 +11,9 @@
           <li class="nav-item active">
             <router-link class="nav-link" to="/">Home <span class="sr-only">(current)</span></router-link>
           </li>
+          <li>
+            <a href="https://github.com/chatbox-inc/webhook-proxy" target="_blank" class="nav-link">GitHub</a>
+          </li>
           <!--<li class="nav-item">-->
             <!--<a class="nav-link" href="#">Link</a>-->
           <!--</li>-->

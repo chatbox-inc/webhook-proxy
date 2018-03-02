@@ -6,17 +6,19 @@
       <h3>Webhook list</h3>
 
       <div class="list-group list-group-flush mt-5">
-        <a v-for="(item,key) in items" :key="key" @click="setActive(item)"
-           class="list-group-item list-group-item-action flex-column align-items-start" >
-
-          <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">{{item.name}}</h5>
-            <!--<small>3 days ago</small>-->
-          </div>
-          <p class="mb-1">{{url + '/webhook/' +item.name}}</p>
-          <small v-if="item.url">Proxy to {{item.url}}</small>
-          <small v-else>no url connected</small>
-        </a>
+        <div v-for="(item,key) in items" :key="key"
+             class="list-group-item list-group-item-action flex-column align-items-start">
+          <a @click="setActive(item)">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">{{item.name}}</h5>
+              <!--<small>3 days ago</small>-->
+            </div>
+            <p class="mb-1">{{url + '/webhook/' +item.name}}</p>
+            <small v-if="item.url">Proxy to {{item.url}}</small>
+            <small v-else>no url connected</small>
+          </a>
+          <router-link to="/edit" @click.native="changeState(item.name, item.url)">Edit</router-link>
+        </div>
       </div>
 
     </div>
@@ -26,6 +28,7 @@
 <script>
 import AppLogo from '~/components/AppLogo.vue'
 import AppNavibar from '~/components/Navibar.vue'
+import axios from 'axios'
 
 export default {
   components: {
@@ -38,12 +41,15 @@ export default {
     },
     url(){
       return process.env.APP_URL;
-    }
+    },
   },
   methods:{
     setActive(item){
       this.$store.commit("SET_ACTIVE",item);
       this.$router.push("/logs/webhook")
+    },
+    changeState(name, url) {
+      this.$store.commit('SET_EDIT', { name: name, url: url })
     }
   },
   async mounted(){

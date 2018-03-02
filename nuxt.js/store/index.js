@@ -3,8 +3,15 @@ import api from '~/service/http.js'
 export const state = () => ({
   list: [],
   active: null,
-  error: null // list の取得に関するエラー
+  error: null, // list の取得に関するエラー
+  edit: {}
 })
+
+export const getters = {
+  edit: state => {
+    return state.edit
+  }
+}
 
 export const mutations = {
   SET_LIST (state, list) {
@@ -12,6 +19,9 @@ export const mutations = {
   },
   SET_ACTIVE (state, item) {
     state.active = item
+  },
+  SET_EDIT (state, item) {
+    state.edit = item
   }
 }
 
